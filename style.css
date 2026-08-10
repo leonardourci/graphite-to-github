@@ -1,0 +1,94 @@
+/* All selectors are gh2gt-prefixed. Graphite ships empty class attributes
+   (CSS-in-JS), so there is nothing here to collide with.
+
+   Colour is derived from `currentColor` throughout -- the text colour Graphite
+   already computed for that spot. So the chips are correct in both Graphite
+   themes with no media query and no theme detection. Earlier these relied on
+   `opacity` alone, which left the text washed out against a dark background;
+   a tinted fill plus full-opacity text fixes the contrast. */
+
+.gh2gt-inline,
+.gh2gt-row {
+  align-items: center;
+  background: color-mix(in srgb, currentColor 12%, transparent);
+  border: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+  border-radius: 6px;
+  color: inherit;
+  display: inline-flex;
+  font: inherit;
+  line-height: 1;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.gh2gt-inline {
+  font-size: 12px;
+  gap: 5px;
+  margin-left: 10px;
+  padding: 4px 8px;
+}
+
+.gh2gt-inline:hover,
+.gh2gt-row:hover {
+  background: color-mix(in srgb, currentColor 22%, transparent);
+}
+
+/* Stack rows are siblings in one block container, each a full-width flex with
+   no horizontal slack, so the chip is positioned at the row's right end -- in
+   padding reserved for it by content.js. `top` is set from JS because all rows
+   share this container, which rules out CSS-only vertical centring. */
+.gh2gt-rowhost {
+  position: relative;
+}
+
+.gh2gt-row {
+  padding: 3px 4px;
+  position: absolute;
+  right: 2px;
+  transform: translateY(-50%);
+}
+
+.gh2gt-pill {
+  align-items: stretch;
+  background: #1f2328;
+  border-radius: 8px;
+  bottom: 16px;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 35%);
+  color: #fff;
+  display: flex;
+  font-family: system-ui, sans-serif;
+  font-size: 12px;
+  /* Clears Graphite's ~48px left nav rail. At 16px the pill covered the rail's
+     bottom controls (settings, help). */
+  left: 64px;
+  overflow: hidden;
+  position: fixed;
+  /* Above Graphite's own chrome, below nothing it needs. */
+  z-index: 2147483000;
+}
+
+.gh2gt-dismiss {
+  background: none;
+  border: 0;
+  border-right: 1px solid rgb(255 255 255 / 20%);
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 8px 12px;
+}
+
+.gh2gt-pill-link {
+  align-items: center;
+  color: inherit;
+  display: flex;
+  font-weight: 600;
+  gap: 6px;
+  padding: 8px 12px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.gh2gt-dismiss:hover,
+.gh2gt-pill-link:hover {
+  background: rgb(255 255 255 / 12%);
+}

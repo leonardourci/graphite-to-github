@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Open in GitHub for Graphite",
+  "version": "1.0.0",
+  "description": "Adds a link from a Graphite pull request to the same pull request on GitHub.",
+  "homepage_url": "https://github.com/leonardourci/graphite-to-github",
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://app.graphite.com/*", "https://app.graphite.dev/*"],
+      "js": ["url.js", "content.js"],
+      "css": ["style.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
