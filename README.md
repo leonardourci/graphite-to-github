@@ -1,5 +1,7 @@
 # Open in GitHub for Graphite
 
+[![test](https://github.com/leonardourci/graphite-to-github/actions/workflows/test.yml/badge.svg)](https://github.com/leonardourci/graphite-to-github/actions/workflows/test.yml)
+
 Graphite's own extension adds a "View in Graphite" link to GitHub PR pages. Nothing does the reverse, so this does: on a Graphite pull request, it adds links to the same pull request on GitHub.
 
 Three of them:
@@ -44,10 +46,10 @@ Each of the three injections is independent. If a Graphite redesign moves the br
 ## Test
 
 ```
-node url.test.js
+npm test
 ```
 
-Covers the URL mapping, which is where all the branching logic lives. The DOM injection is verified by hand: load a PR page, a multi-PR stack, and a non-PR Graphite page, then navigate between them and confirm the links appear, retarget, and get cleaned up.
+Runs in CI on every push and pull request. Covers the URL mapping, which is where all the branching logic lives. The DOM injection is verified by hand: load a PR page, a multi-PR stack, and a non-PR Graphite page, then navigate between them and confirm the links appear, retarget, and get cleaned up.
 
 ## Icons
 
