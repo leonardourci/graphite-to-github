@@ -38,7 +38,7 @@ One click from a Graphite pull request to the same pull request on GitHub.
 **Description**
 
 ```
-Graphite's own extension adds a "View in Graphite" link to GitHub pull request pages. Nothing does the reverse — so when you're reviewing in Graphite and need GitHub for a check's raw logs, a merge queue detail, or a permalink to paste somewhere, you end up retyping the URL by hand.
+Graphite's own extension adds a "View in Graphite" link to GitHub pull request pages. Nothing does the reverse, so when you're reviewing in Graphite and need GitHub for a check's raw logs, a merge queue detail, or a permalink to paste somewhere, you end up retyping the URL by hand.
 
 This adds that missing direction. On any Graphite pull request page you get three links to the same pull request on GitHub:
 

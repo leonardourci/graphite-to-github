@@ -53,6 +53,17 @@
     border-radius: 10px;
   }
 
+  /* 16:9 without the old padding-bottom hack. */
+  .video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 22px 0 0;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--panel);
+  }
+  .video iframe { display: block; width: 100%; height: 100%; border: 0; border-radius: 9px }
+
   .cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 34px 0 0 }
   .btn {
     display: inline-block;
@@ -112,7 +123,7 @@
 
   <p>
     Graphite's own extension adds a <em>View in Graphite</em> link to GitHub pull request pages.
-    Nothing does the reverse — so when you're reviewing in Graphite and need GitHub for a check's
+    Nothing does the reverse, so when you're reviewing in Graphite and need GitHub for a check's
     raw logs, a merge queue detail, or a permalink to paste somewhere, you end up retyping the URL
     by hand.
   </p>
@@ -130,6 +141,19 @@
   <img class="shot"
        src="https://raw.githubusercontent.com/leonardourci/graphite-to-github/main/store/screenshot-1280x800.jpg"
        alt="A Graphite pull request page with the extension's links: one beside the PR number, one on each stack row, and a floating pill in the bottom-left corner.">
+
+  <h2>Demo</h2>
+  <!-- youtube-nocookie so the page doesn't set tracking cookies, which would sit
+       badly next to the privacy claim below. -->
+  <div class="video">
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/PnYBxjkHfYM"
+      title="Open in GitHub for Graphite — demo"
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen></iframe>
+  </div>
 
   <h2>How it works</h2>
   <p>
@@ -158,7 +182,6 @@
 
   <div class="cta">
     <a class="btn btn-primary" href="https://github.com/leonardourci/graphite-to-github">Source on GitHub</a>
-    <a class="btn" href="https://www.youtube.com/watch?v=PnYBxjkHfYM">Watch the demo</a>
     <a class="btn" href="https://github.com/leonardourci/graphite-to-github/issues">Report an issue</a>
   </div>
 
