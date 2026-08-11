@@ -66,6 +66,16 @@ done
 
 Absolute pixel sizing matters: old headless Chrome lays out at 800px regardless of `--window-size` and then crops, so viewport units (`100vw`) render the top-left corner of a giant icon.
 
+The landing page's favicon is a copy of the same source, so refresh it too:
+
+```sh
+cp icons/icon.svg docs/favicon.svg
+{ printf '<style>html,body{margin:0;overflow:hidden}svg{display:block;width:32px;height:32px}</style>'; cat icons/icon.svg; } > /tmp/fav.html
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu \
+  --hide-scrollbars --force-device-scale-factor=1 \
+  --screenshot="docs/favicon-32.png" --window-size=32,32 /tmp/fav.html
+```
+
 ## Package
 
 ```sh
