@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open in GitHub for Graphite</title>
+<meta name="description" content="Chrome extension adding a link from a Graphite pull request to the same pull request on GitHub.">
+<style>
+  /* Single hue derived from the extension icon: slate ground, GitHub accent
+     blue for the one thing that is a link to elsewhere. */
+  :root {
+    --bg: #1c2128;
+    --panel: #22272e;
+    --line: #373e47;
+    --text: #e6edf3;
+    --muted: #9aa4b2;
+    --accent: #2f81f7;
+  }
+
+  * { box-sizing: border-box }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  main { max-width: 760px; margin: 0 auto; padding: 72px 24px 96px }
+
+  header { display: flex; align-items: center; gap: 22px; margin-bottom: 34px }
+  header svg { flex: none; border-radius: 18px }
+
+  h1 { font-size: clamp(28px, 6vw, 40px); line-height: 1.15; letter-spacing: -.02em; margin: 0 }
+  .tag { color: var(--muted); margin: 8px 0 0; font-size: clamp(15px, 3vw, 18px) }
+
+  h2 { font-size: 20px; letter-spacing: -.01em; margin: 44px 0 14px }
+
+  ul { padding-left: 22px; margin: 0 }
+  li { margin: 8px 0 }
+  li b { font-weight: 600 }
+
+  a { color: var(--accent); text-decoration: none }
+  a:hover { text-decoration: underline }
+
+  .shot {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 22px 0 0;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 34px 0 0 }
+  .btn {
+    display: inline-block;
+    padding: 11px 18px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--panel);
+    color: var(--text);
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .btn:hover { border-color: var(--accent); text-decoration: none }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff }
+
+  code {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 1px 6px;
+    font-size: .9em;
+  }
+
+  table { border-collapse: collapse; width: 100%; margin: 14px 0 0; font-size: 15px }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line) }
+  th { color: var(--muted); font-weight: 600 }
+  td code { font-size: .85em }
+
+  .wrap { overflow-x: auto }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <svg viewBox="0 0 128 128" width="76" height="76" aria-hidden="true">
+      <rect width="128" height="128" rx="24" fill="#22272e"/>
+      <rect x="12" y="40" width="22" height="10" rx="5" fill="#fff" fill-opacity=".45"/>
+      <rect x="12" y="63" width="20" height="10" rx="5" fill="#2f81f7"/>
+      <path d="M28 57 44 68 28 79z" fill="#2f81f7"/>
+      <rect x="12" y="86" width="18" height="10" rx="5" fill="#fff" fill-opacity=".45"/>
+      <g transform="translate(52 40) scale(3.5)">
+        <path fill="#fff" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A7.995 7.995 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+      </g>
+    </svg>
+    <div>
+      <h1>Open in GitHub for Graphite</h1>
+      <p class="tag">One click from a Graphite pull request to the same pull request on GitHub.</p>
+    </div>
+  </header>
+
+  <p>
+    Graphite's own extension adds a <em>View in Graphite</em> link to GitHub pull request pages.
+    Nothing does the reverse — so when you're reviewing in Graphite and need GitHub for a check's
+    raw logs, a merge queue detail, or a permalink to paste somewhere, you end up retyping the URL
+    by hand.
+  </p>
+
+  <h2>What it adds</h2>
+  <ul>
+    <li><b>Inline</b>, beside the repository and PR number above the title.</li>
+    <li><b>A floating pill</b>, bottom-left, with a dismiss button.</li>
+    <li><b>A GitHub icon on each stack row</b>, so you can jump to a sibling PR on GitHub without opening it in Graphite first.</li>
+  </ul>
+  <p>
+    All three are ordinary links, so cmd-click and middle-click open a new tab exactly as you'd expect.
+  </p>
+
+  <img class="shot"
+       src="https://raw.githubusercontent.com/leonardourci/graphite-to-github/main/store/screenshot-1280x800.jpg"
+       alt="A Graphite pull request page with the extension's links: one beside the PR number, one on each stack row, and a floating pill in the bottom-left corner.">
+
+  <h2>How it works</h2>
+  <p>
+    Graphite's pull request path is GitHub's own path behind a <code>/github</code> prefix, so the
+    mapping is a plain string rewrite. No API call, no sign-in, no network request of any kind, and
+    nothing stored. Both of Graphite's URL shapes are handled:
+  </p>
+  <div class="wrap">
+    <table>
+      <thead>
+        <tr><th>Shape</th><th>Where it appears</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>/github/OWNER/REPO/pull/8730</code></td><td>address bar, comment permalinks</td></tr>
+        <tr><td><code>/github/pr/OWNER/REPO/8730/slug</code></td><td>stack row links</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Privacy</h2>
+  <p>
+    No data collection of any kind. No analytics, no telemetry, no network requests, no storage.
+    The extension runs only on <code>app.graphite.com</code> and <code>app.graphite.dev</code>, and
+    does nothing anywhere else. Its only permission is the content-script match on those two hosts.
+  </p>
+
+  <div class="cta">
+    <a class="btn btn-primary" href="https://github.com/leonardourci/graphite-to-github">Source on GitHub</a>
+    <a class="btn" href="https://github.com/leonardourci/graphite-to-github/issues">Report an issue</a>
+  </div>
+
+  <footer>
+    MIT licensed. Not affiliated with Graphite or GitHub.
+  </footer>
+</main>
+</body>
+</html>
