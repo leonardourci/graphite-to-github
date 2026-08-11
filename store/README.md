@@ -8,12 +8,13 @@ nothing but "incorrect image size", so don't hand it a raw window capture.
 
 ## Rebuilding the promo tiles
 
-Both tiles are generated from `../icons/icon.svg`, so they stay in sync when the
-icon changes. Sources are the `.html` files here.
+All three tiles are generated from `../icons/icon.svg`, so they stay in sync when
+the icon changes. Sources are the `.html` files here. `promo-1280x800.jpg` is a
+title card sized to the screenshot slot, not a promo-tile slot of its own.
 
 ```sh
 CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-for s in 440x280 1400x560; do
+for s in 440x280 1280x800 1400x560; do
   "$CHROME" --headless --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \
     --screenshot="/tmp/promo-$s.png" --window-size="${s%x*},${s#*x}" "store/promo-$s.html"
   sips -s format jpeg -s formatOptions 95 "/tmp/promo-$s.png" --out "store/promo-$s.jpg"
