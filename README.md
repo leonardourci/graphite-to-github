@@ -14,13 +14,9 @@ All three are real `<a href>` elements, so cmd-click and middle-click open a new
 
 Hovering any of them shows the tooltip, which is the whole reason this exists.
 
-The in-page glyphs are Octicons (`mark-github`, `link-external`), drawn in `currentColor` so they take Graphite's own text colour in either theme.
-
-The extension icon is a stack, an arrow, and the Octocat — Graphite to GitHub, in that order. Worth knowing before you submit it: GitHub's logo policy asks that their mark not be used in an app icon or as part of another product's branding, and borrowed branding is a documented Web Store rejection reason. That's an accepted risk here, not an oversight; two original-cat drafts were tried and neither read as a cat. If a reviewer objects, swapping the `<g>` in `icons/icon.svg` for original artwork fixes it without touching any other file. Using the mark *in the page* to label a link to GitHub is ordinary nominative use and isn't the exposed part.
-
 ## Install
 
-Not on the Chrome Web Store yet. To run it locally:
+From source, until the Chrome Web Store listing is live:
 
 1. `chrome://extensions`
 2. Turn on **Developer mode**
@@ -42,6 +38,8 @@ Both map to `https://github.com/OWNER/REPO/pull/8730`.
 Graphite is a React SPA that changes URLs without a page load and re-renders panels constantly, so injection runs through one idempotent `sync()` driven by a debounced `MutationObserver`. Graphite also ships empty class attributes (CSS-in-JS) and almost no `data-testid`, so anchors are semantic: the breadcrumb is matched by its `repo #1234` text cross-checked against the PR number in the URL, and stack rows by their href shape within the stack panel.
 
 Each of the three injections is independent. If a Graphite redesign moves the breadcrumb or the stack panel, those quietly stop appearing and the floating pill — which uses no Graphite selectors at all — keeps working.
+
+The in-page glyphs are Octicons (`mark-github`, `link-external`), drawn in `currentColor` so they take Graphite's own text colour in either theme.
 
 ## Test
 
@@ -79,32 +77,23 @@ cp icons/icon.svg docs/favicon.svg
   --screenshot="docs/favicon-32.png" --window-size=32,32 "${TMPDIR:-/tmp}/fav.html"
 ```
 
-## Package
+Read the comment at the top of `icons/icon.svg` before redrawing the artwork — the current design is a set of deliberate constraints, not an accident.
 
-```sh
-zip -r dist.zip manifest.json url.js content.js style.css icons -x 'icons/icon.svg'
-```
-
-## Publish
-
-The first submission is manual — the Web Store API publishes a *package*, but can't create the store item or set listing metadata, so the extension needs to exist in the dashboard first. That needs a Google account, the one-time $5 developer registration, and a few days of review.
-
-Updates after that:
-
-```sh
-npx chrome-webstore-upload-cli upload --source dist.zip --extension-id <id> --auto-publish
-```
-
-Bump `version` in `manifest.json` first; the store rejects a re-upload of an existing version.
-
-One-time auth setup for the CLI: a Google Cloud project with the Chrome Web Store API enabled, a Desktop-app OAuth client, and one consent flow to mint a refresh token (`npx chrome-webstore-upload-keys` walks it). The client id, client secret, and refresh token are passed as env vars from a gitignored `.env`. They must never enter the repo or the published zip.
-
-### Privacy
+## Privacy
 
 No permissions beyond the content-script host match, no network requests, no storage, no data collection of any kind. The pill's dismissal is in-memory and comes back on reload.
+
+Full policy: <https://leonardourci.github.io/graphite-to-github/privacy.html>
 
 ## Known limitations
 
 - `github.com` is hardcoded; GitHub Enterprise hosts aren't supported. Supporting them means a configurable host, which drags in an options page and a `storage` permission.
 - The stack-row chip sits at the row's right end, not next to the title. Stack rows are full-width flex elements with no horizontal slack, so `content.js` extends the row's right padding to reserve a slot. Hugging the title looks better on short titles but breaks on long ones: they're ellipsis-truncated, so the text box runs past its visible end and the chip lands under the row's metadata.
 - The row chip is icon-only. The reserved slot is 28px, which fits the GitHub mark but not the redirect arrow as well; both appear on the inline link and the pill.
+
+## Links
+
+- Website and demo: <https://leonardourci.github.io/graphite-to-github/>
+- Packaging and release: [`store/README.md`](store/README.md)
+
+MIT licensed. Not affiliated with Graphite or GitHub.

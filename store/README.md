@@ -1,10 +1,57 @@
-# Store assets
+# Packaging and release
 
-Everything the Chrome Web Store dashboard asks for. See `listing.md` for the
-copy and which file goes in which field.
+Maintainer notes: everything needed to build the package and drive the Chrome Web
+Store listing. Contributors don't need any of this — see the root `README.md`.
+
+`listing.md` holds the listing copy and says which asset goes in which field.
 
 The store validates dimensions exactly — a 1274x799 screenshot is rejected with
 nothing but "incorrect image size", so don't hand it a raw window capture.
+
+## Building the package
+
+```sh
+zip -r dist.zip manifest.json url.js content.js style.css icons -x 'icons/icon.svg'
+```
+
+Only what the extension runs: no tests, no docs, no store assets, no SVG source.
+`dist.zip` is gitignored.
+
+## Publishing
+
+The first submission is manual. The Web Store API publishes a *package*, but
+can't create the store item or set listing metadata, so the extension has to
+exist in the dashboard first — which needs a Google account, the one-time $5
+developer registration, and a few days of review.
+
+Updates after that:
+
+```sh
+npx chrome-webstore-upload-cli upload --source dist.zip --extension-id <id> --auto-publish
+```
+
+Bump `version` in `manifest.json` first; the store rejects a re-upload of an
+existing version.
+
+One-time auth setup for the CLI: a Google Cloud project with the Chrome Web Store
+API enabled, a Desktop-app OAuth client, and one consent flow to mint a refresh
+token (`npx chrome-webstore-upload-keys` walks it). The client id, client secret,
+and refresh token are passed as env vars from a gitignored `.env`. They must never
+enter the repo or the published zip.
+
+## Icon artwork and the Octocat
+
+The extension icon includes GitHub's Octocat. GitHub's logo policy asks that their
+mark not be used in an app icon or as part of another product's branding, and
+borrowed branding is a documented Web Store rejection reason. Accepted knowingly
+after two original-cat drafts failed to read as cats.
+
+If a reviewer objects, swap the `<g>` in `../icons/icon.svg` for original artwork,
+re-run the icon and favicon commands in the root README, rebuild `dist.zip`, and
+re-upload. No other file changes.
+
+Using the mark *in the page* to label a link to GitHub is ordinary nominative use
+and isn't the exposed part.
 
 ## Rebuilding the promo tiles
 
