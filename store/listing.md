@@ -6,13 +6,17 @@ required dimensions — the store rejects anything even a pixel off.
 | Asset | File | Required |
 | --- | --- | --- |
 | Store icon | `../icons/128.png` | 128x128 PNG |
-| Screenshot | `promo-1280x800.jpg`, `screenshot-1280x800.jpg` | 1280x800 or 640x400, JPEG or 24-bit PNG, no alpha |
+| Screenshot | `promo-1280x800.jpg`, `screenshot-annotated-1280x800.jpg`, `screenshot-1280x800.jpg` | 1280x800 or 640x400, JPEG or 24-bit PNG, no alpha |
 | Small promo tile | `promo-440x280.jpg` | 440x280 |
 | Marquee promo tile | `promo-1400x560.jpg` | 1400x560 |
 
-Up to five screenshots are allowed, and at least one is required. Upload
-`promo-1280x800.jpg` first as a title card, then `screenshot-1280x800.jpg`
-showing the extension actually working on a stack.
+Up to five screenshots are allowed, and at least one is required. Upload in this
+order:
+
+1. `promo-1280x800.jpg` — title card
+2. `screenshot-annotated-1280x800.jpg` — arrows pointing at all three injection
+   points, which is the fastest way for someone to understand what they get
+3. `screenshot-1280x800.jpg` — the same page unannotated
 
 The 440x280 and 1400x560 tiles are optional; they only matter if Google ever
 features the extension.
