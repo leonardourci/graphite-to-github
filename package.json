@@ -1,0 +1,8 @@
+{
+  "name": "graphite-to-github",
+  "private": true,
+  "description": "Chrome extension linking a Graphite pull request to the same pull request on GitHub.",
+  "scripts": {
+    "test": "node url.test.js"
+  }
+}
