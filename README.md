@@ -56,11 +56,15 @@ Runs in CI on every push and pull request. Covers the URL mapping, which is wher
 `icons/icon.svg` is the source. Regenerate the PNGs with headless Chrome (no image tooling required):
 
 ```sh
+# Resolve Chrome: PATH first (Linux), then the macOS bundle, which is never on
+# PATH. Set CHROME=... yourself for Chromium, Beta/Canary, or ~/Applications.
+CHROME="${CHROME:-$(command -v google-chrome || command -v google-chrome-stable \
+  || command -v chromium || echo "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")}"
+
 for s in 16 32 48 128; do
-  { printf '<style>html,body{margin:0;overflow:hidden}svg{display:block;width:%spx;height:%spx}</style>' "$s" "$s"; cat icons/icon.svg; } > "/tmp/wrap-$s.html"
-  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu \
-    --hide-scrollbars --force-device-scale-factor=1 \
-    --screenshot="icons/$s.png" --window-size=$s,$s "/tmp/wrap-$s.html"
+  { printf '<style>html,body{margin:0;overflow:hidden}svg{display:block;width:%spx;height:%spx}</style>' "$s" "$s"; cat icons/icon.svg; } > "${TMPDIR:-/tmp}/wrap-$s.html"
+  "$CHROME" --headless --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \
+    --screenshot="icons/$s.png" --window-size=$s,$s "${TMPDIR:-/tmp}/wrap-$s.html"
 done
 ```
 
@@ -70,10 +74,9 @@ The landing page's favicon is a copy of the same source, so refresh it too:
 
 ```sh
 cp icons/icon.svg docs/favicon.svg
-{ printf '<style>html,body{margin:0;overflow:hidden}svg{display:block;width:32px;height:32px}</style>'; cat icons/icon.svg; } > /tmp/fav.html
-"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu \
-  --hide-scrollbars --force-device-scale-factor=1 \
-  --screenshot="docs/favicon-32.png" --window-size=32,32 /tmp/fav.html
+{ printf '<style>html,body{margin:0;overflow:hidden}svg{display:block;width:32px;height:32px}</style>'; cat icons/icon.svg; } > "${TMPDIR:-/tmp}/fav.html"
+"$CHROME" --headless --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \
+  --screenshot="docs/favicon-32.png" --window-size=32,32 "${TMPDIR:-/tmp}/fav.html"
 ```
 
 ## Package

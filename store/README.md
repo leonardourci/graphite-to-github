@@ -13,13 +13,19 @@ the icon changes. Sources are the `.html` files here. `promo-1280x800.jpg` is a
 title card sized to the screenshot slot, not a promo-tile slot of its own.
 
 ```sh
-CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+# Resolve Chrome: PATH first (Linux), then the macOS bundle, which is never on
+# PATH. Set CHROME=... yourself for Chromium, Beta/Canary, or ~/Applications.
+CHROME="${CHROME:-$(command -v google-chrome || command -v google-chrome-stable \
+  || command -v chromium || echo "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")}"
+
 for s in 440x280 1280x800 1400x560; do
   "$CHROME" --headless --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \
-    --screenshot="/tmp/promo-$s.png" --window-size="${s%x*},${s#*x}" "store/promo-$s.html"
-  sips -s format jpeg -s formatOptions 95 "/tmp/promo-$s.png" --out "store/promo-$s.jpg"
+    --screenshot="${TMPDIR:-/tmp}/promo-$s.png" --window-size="${s%x*},${s#*x}" "store/promo-$s.html"
+  sips -s format jpeg -s formatOptions 95 "${TMPDIR:-/tmp}/promo-$s.png" --out "store/promo-$s.jpg"
 done
 ```
+
+`sips` is macOS-only. On Linux, swap it for `magick promo-$s.png -quality 95 promo-$s.jpg`.
 
 The tile sizes are absolute px in the HTML rather than viewport units, because
 old headless Chrome lays out at 800px wide regardless of `--window-size` and then
