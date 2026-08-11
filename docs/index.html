@@ -5,102 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Open in GitHub for Graphite</title>
 <meta name="description" content="Chrome extension adding a link from a Graphite pull request to the same pull request on GitHub.">
-<style>
-  /* Single hue derived from the extension icon: slate ground, GitHub accent
-     blue for the one thing that is a link to elsewhere. */
-  :root {
-    --bg: #1c2128;
-    --panel: #22272e;
-    --line: #373e47;
-    --text: #e6edf3;
-    --muted: #9aa4b2;
-    --accent: #2f81f7;
-  }
-
-  * { box-sizing: border-box }
-
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  main { max-width: 760px; margin: 0 auto; padding: 72px 24px 96px }
-
-  header { display: flex; align-items: center; gap: 22px; margin-bottom: 34px }
-  header svg { flex: none; border-radius: 18px }
-
-  h1 { font-size: clamp(28px, 6vw, 40px); line-height: 1.15; letter-spacing: -.02em; margin: 0 }
-  .tag { color: var(--muted); margin: 8px 0 0; font-size: clamp(15px, 3vw, 18px) }
-
-  h2 { font-size: 20px; letter-spacing: -.01em; margin: 44px 0 14px }
-
-  ul { padding-left: 22px; margin: 0 }
-  li { margin: 8px 0 }
-  li b { font-weight: 600 }
-
-  a { color: var(--accent); text-decoration: none }
-  a:hover { text-decoration: underline }
-
-  .shot {
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 22px 0 0;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-  }
-
-  /* 16:9 without the old padding-bottom hack. */
-  .video {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    margin: 22px 0 0;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    background: var(--panel);
-  }
-  .video iframe { display: block; width: 100%; height: 100%; border: 0; border-radius: 9px }
-
-  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 34px 0 0 }
-  .btn {
-    display: inline-block;
-    padding: 11px 18px;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: var(--panel);
-    color: var(--text);
-    font-weight: 600;
-    font-size: 15px;
-  }
-  .btn:hover { border-color: var(--accent); text-decoration: none }
-  .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff }
-
-  code {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 5px;
-    padding: 1px 6px;
-    font-size: .9em;
-  }
-
-  table { border-collapse: collapse; width: 100%; margin: 14px 0 0; font-size: 15px }
-  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line) }
-  th { color: var(--muted); font-weight: 600 }
-  td code { font-size: .85em }
-
-  .wrap { overflow-x: auto }
-
-  footer {
-    margin-top: 56px;
-    padding-top: 22px;
-    border-top: 1px solid var(--line);
-    color: var(--muted);
-    font-size: 14px;
-  }
-</style>
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
 <main>
@@ -187,6 +92,7 @@
 
   <footer>
     MIT licensed. Not affiliated with Graphite or GitHub.
+    <a href="privacy.html">Privacy policy</a>.
   </footer>
 </main>
 </body>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Open in GitHub for Graphite</title>
+<meta name="description" content="Privacy policy for the Open in GitHub for Graphite Chrome extension. It collects no data.">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<main>
+  <h1>Privacy Policy</h1>
+  <p class="tag">Open in GitHub for Graphite — Chrome extension. Last updated 11 August 2026.</p>
+
+  <h2>Summary</h2>
+  <p>
+    The extension collects no data. There is no analytics, no telemetry, no tracking, no account,
+    and no server — it makes no network requests at all.
+  </p>
+
+  <h2>What the extension does</h2>
+  <p>
+    On a Graphite pull request page it reads the address bar URL, rewrites it into the equivalent
+    <code>github.com</code> pull request URL, and inserts links pointing there. The rewrite is plain
+    string manipulation performed locally in your browser. Nothing about the page, the pull request,
+    or you is sent anywhere.
+  </p>
+
+  <h2>Data collected</h2>
+  <p>
+    None. Specifically, the extension does not collect, transmit, sell, or share:
+  </p>
+  <ul>
+    <li>personally identifiable information</li>
+    <li>health information</li>
+    <li>financial or payment information</li>
+    <li>authentication information</li>
+    <li>personal communications</li>
+    <li>location data</li>
+    <li>web history</li>
+    <li>user activity such as clicks, scrolling, or keystrokes</li>
+    <li>website content</li>
+  </ul>
+
+  <h2>Storage</h2>
+  <p>
+    The extension requests no storage permission and writes nothing to disk. Dismissing the floating
+    button is held in memory only, which is why the button reappears when you reload the page.
+  </p>
+
+  <h2>Permissions</h2>
+  <p>
+    Its only permission is the content-script host match on <code>app.graphite.com</code> and
+    <code>app.graphite.dev</code>. That is the access needed to read the current URL and insert a
+    link into the page. The extension does not run on any other site, and it has no background
+    process.
+  </p>
+
+  <h2>Remote code</h2>
+  <p>
+    None. All JavaScript and CSS ship inside the extension package. Nothing is fetched, evaluated,
+    or imported at runtime.
+  </p>
+
+  <h2>Third parties</h2>
+  <p>
+    The extension has no third-party dependencies and contacts no third-party services. Following a
+    link it adds takes you to <code>github.com</code>, where GitHub's own privacy policy applies.
+  </p>
+  <p>
+    This website embeds the demo video from <code>youtube-nocookie.com</code>, YouTube's
+    reduced-tracking domain. That applies to this page only, not to the extension.
+  </p>
+
+  <h2>Changes</h2>
+  <p>
+    If this policy ever changes, the updated version will be published here with a new date. The
+    full history is public in the
+    <a href="https://github.com/leonardourci/graphite-to-github/commits/main/docs/privacy.html">repository</a>.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Open an issue at
+    <a href="https://github.com/leonardourci/graphite-to-github/issues">github.com/leonardourci/graphite-to-github/issues</a>.
+  </p>
+
+  <div class="cta">
+    <a class="btn" href="./">Back to the extension</a>
+    <a class="btn" href="https://github.com/leonardourci/graphite-to-github">Source on GitHub</a>
+  </div>
+
+  <footer>
+    MIT licensed. Not affiliated with Graphite or GitHub.
+  </footer>
+</main>
+</body>
+</html>

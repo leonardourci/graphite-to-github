@@ -98,8 +98,15 @@ The extension's content script runs only on Graphite's pull request pages. It re
 
 **Remote code**: no.
 
-**Data usage**: leave every category unchecked, then certify all three compliance
-statements. A privacy policy URL isn't required, since nothing is collected.
+**Data usage**: leave every one of the nine categories unchecked, then tick all
+three compliance declarations. Unchecked declarations fail the publish even when
+nothing is declared.
+
+**Privacy policy URL** (required field, regardless of what is declared)
+
+```
+https://leonardourci.github.io/graphite-to-github/privacy.html
+```
 
 ## Distribution tab
 
