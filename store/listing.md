@@ -55,6 +55,26 @@ No data collection of any kind. No analytics, no telemetry, no network requests,
 Open source: https://github.com/leonardourci/graphite-to-github
 ```
 
+**Video** (optional field, above the screenshots)
+
+```
+https://www.youtube.com/watch?v=PnYBxjkHfYM
+```
+
+Must be Public or Unlisted. A Private video renders as unavailable on the
+listing.
+
+**Website**
+
+```
+https://leonardourci.github.io/graphite-to-github/
+```
+
+Verified in Google Search Console under the same account, so the store can show
+it as a verified website rather than a bare link. Keep
+`docs/googled30eb243e93eda57.html` in place — verification is re-checked, and
+deleting the file silently unverifies the property.
+
 **Category**: Developer Tools
 **Language**: English
 
