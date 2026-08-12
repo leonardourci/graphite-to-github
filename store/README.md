@@ -19,16 +19,22 @@ Only what the extension runs: no tests, no docs, no store assets, no SVG source.
 
 ## Publishing
 
-The first submission is manual. The Web Store API publishes a *package*, but
-can't create the store item or set listing metadata, so the extension has to
-exist in the dashboard first — which needs a Google account, the one-time $5
-developer registration, and a few days of review.
+Already listed, so the manual dashboard submission is done — that part was
+unavoidable, since the Web Store API publishes a *package* but can't create the
+store item or set listing metadata.
 
-Updates after that:
+- Listing: <https://chromewebstore.google.com/detail/open-in-github-for-graphi/jljeffilkgbeodnlipfhhmcdfipggcdi>
+- Extension ID: `jljeffilkgbeodnlipfhhmcdfipggcdi`
+
+Updates:
 
 ```sh
-npx chrome-webstore-upload-cli upload --source dist.zip --extension-id <id> --auto-publish
+npx chrome-webstore-upload-cli upload --source dist.zip \
+  --extension-id jljeffilkgbeodnlipfhhmcdfipggcdi --auto-publish
 ```
+
+Listing text, screenshots, and the privacy answers still have to be edited in the
+dashboard; the API only replaces the package.
 
 Bump `version` in `manifest.json` first; the store rejects a re-upload of an
 existing version.

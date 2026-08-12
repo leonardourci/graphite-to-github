@@ -16,7 +16,9 @@ Hovering any of them shows the tooltip, which is the whole reason this exists.
 
 ## Install
 
-From source, until the Chrome Web Store listing is live:
+[**Chrome Web Store**](https://chromewebstore.google.com/detail/open-in-github-for-graphi/jljeffilkgbeodnlipfhhmcdfipggcdi)
+
+Or from source, which is what you want when working on it:
 
 1. `chrome://extensions`
 2. Turn on **Developer mode**
